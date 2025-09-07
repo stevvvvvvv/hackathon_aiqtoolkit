@@ -1,18 +1,20 @@
-# NVIDIA NeMo Agent Toolkit AI对话机器人
+# NVIDIA NAT AI对话机器人-功能组件拓展
 
-> 🏆 **黑客松项目** - 基于NVIDIA官方NeMo Agent Toolkit构建的智能对话机器人，展示AI Agent的强大功能
+> 🏆 **黑客松项目** - 基于NVIDIA官方NAT构建的智能对话机器人，展示AI Agent的强大功能
 
-![AI对话机器人界面](docs/ui_screenshot.png)
+![AI对话机器人界面](docs/cover.png)
 
 ## 🎯 项目简介
 
-本项目是为推广NVIDIA NeMo Agent Toolkit而开发的AI对话机器人示例，完全基于NVIDIA官方技术栈构建。系统集成了实时网络搜索、时间查询等功能，支持用户自定义OpenAI兼容的API接口，是学习和体验AI Agent技术的完美起点。
+本项目基于[NVIDIA NAT AI对话机器人](https://github.com/HeKun-NVIDIA/hackathon_aiqtoolkit), 在原始版本的基础上拓展了更多NAT示例中给出的功能组件，以满足对话机器人功能的完备性
 
 ### ✨ 核心特性
 
 - 🤖 **官方架构**: 100%使用NVIDIA官方NeMo Agent Toolkit
 - 🌐 **实时搜索**: 集成Tavily API，支持实时网络搜索
 - ⏰ **时间查询**: 获取当前日期和时间信息
+- 💻 **代码生成**: 基于需求生成对应的python代码
+- 📚 **信息检索**: 在维基百科中搜索对应词条信息
 - 🔧 **灵活配置**: 支持任何OpenAI兼容的API接口
 - 🎨 **现代界面**: 官方UI，支持实时对话和流式响应
 - 🚀 **一键部署**: 跨平台安装脚本，支持Windows/Linux/macOS
@@ -47,7 +49,7 @@
 
 #### 克隆项目
 ```bash
-git clone https://github.com/HeKun-NVIDIA/hackathon_aiqtoolkit.git
+git clone https://github.com/stevvvvvvv/hackathon_aiqtoolkit.git
 cd hackathon_aiqtoolkit
 ```
 ### 🔑 配置API密钥
@@ -55,7 +57,7 @@ cd hackathon_aiqtoolkit
 安装完成后，您需要配置以下API密钥：
 
 #### 1. Tavily搜索API密钥
-在`install.sh`文件中185行左右，将Your API Key替换成你自己的Tavily API Key 来保证搜索功能正常
+在`install.sh`文件中223行左右，将Your API Key替换成你自己的Tavily API Key 来保证搜索功能正常
 ```bash
 # 设置环境变量
 export TAVILY_API_KEY=Your API Key
@@ -67,7 +69,7 @@ export TAVILY_API_KEY=Your API Key
 
 #### 2. 大模型API密钥
 
-编辑 `install.sh` 文件中154行左右,将Your API Key替换成你自己的Bailian API Key：
+编辑 `install.sh` 文件中179行左右,将Your API Key替换成你自己的Bailian API Key：
 
 ```yaml
 llms:
@@ -137,6 +139,18 @@ AI: 现在是晚上11点17分。
 AI: [搜索并介绍NVIDIA AIQ工具包的详细信息]
 ```
 
+### python代码生成测试
+```
+用户: 解释DFS算法并给出python示例
+AI: DFS的基本介绍, 以及对应的Python代码
+```
+
+### 维基百科词条检索
+```
+用户: 为下周的“网络安全研讨会”自动生成背景资料包，包括当前日期、网络最新威胁趋势和维基百科相关术语
+AI: [首先查询今日日期, 其次在互联网上检索有关的最新信息, 最后给出队应词条的维基百科释义]
+```
+
 ## 📁 项目结构
 
 ```
@@ -147,7 +161,8 @@ nvidia-nemo-agent-toolkit-hackathon/
 ├── external/                   # 外部模块
 │   └── aiqtoolkit-opensource-ui/  # 官方UI
 ├── docs/                       # 文档和截图
-│   └── ui_screenshot.png      # 界面截图
+│   └── ui_screenshot.png      # light mode界面截图
+|   └── ui_screenshot.png      # dark mode界面截图
 ├── src/                        # 源代码
 ├── install.sh                  # Linux/macOS安装脚本
 ├── install.bat                 # Windows安装脚本
@@ -230,6 +245,17 @@ tail -f logs/aiq.log
 cd external/aiqtoolkit-opensource-ui
 npm run dev -- --verbose
 ```
+
+#### 5. windows安装脚本报错
+可以参考bat脚本内的流程手动执行, 在确保相关python, nodejs, git, uv环境完善时:
+1. 首先通过`uv venv --seed .venv --python 3.12`生成`venv环境`, 并通过`.venv\Scripts\activate.bat`进行激活, 接下来可以选择从源码安装或者pip的形式安装NAT后端组件, 可参考[NAT安装流程](https://github.com/NVIDIA/NeMo-Agent-Toolkit/blob/develop/docs/source/quick-start/installing.md)
+2. 安装前端，cd到`external\aiqtoolkit-opensource-ui`后执行`npm install`, 等待前端安装完成
+3. 根据脚本内容生成配置文件, 或使用已有的配置文件
+4. 使用`set TAVILY_API_KEY=FILL_IT`设置`TAVILY_API_KEY`
+5. 通过`nat serve --config_file configs\hackathon_new_config.yml --host 0.0.0.0 --port 8001`启动后端服务
+6. 新建一个终端, cd到`external\aiqtoolkit-opensource-ui`目录下通过`npm run dev`启动前端
+7. 在`http://localhost:3000`中测试AI Agent的功能
+8. 对应的停止AI Agent的指令见bat文件
 
 ## 📚 相关资源
 
