@@ -1,0 +1,61 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2025, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+# NVIDIA NeMo Agent Toolkit 黑客松配置
+# 支持用户自定义OpenAI兼容API
+
+general:
+  use_uvloop: true
+
+functions:
+  current_datetime:
+    _type: current_datetime
+  internet_search:
+    _type: tavily_internet_search
+    description: "使用Tavily API进行实时网络搜索"
+  wikipedia_search:
+    _type: wiki_search
+    max_results: 3
+  code_generation:
+    _type: code_generation
+    programming_language: "Python"
+    description: "Useful to generate Python code. For any questions about code generation, you must only use this tool!"
+    llm_name: default_llm
+    verbose: true
+
+llms:
+  # 默认使用Bailian API (用户可修改)
+  default_llm:
+    _type: openai
+    model_name: "qwen-plus"
+    api_key: "FILL_IT"
+    base_url: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+    temperature: 0.7
+    max_tokens: 2048
+  nim_llm:
+    _type: nim
+    model_name: meta/llama-3.1-70b-instruct
+    temperature: 0.0
+    max_tokens: 250
+  r1_model:
+    _type: nim
+    model_name: deepseek-ai/deepseek-r1
+    temperature: 0.0
+    max_tokens: 2000
+
+embedders:
+  nv-embedqa-e5-v5:
+    _type: nim
+    model_name: nvidia/nv-embedqa-e5-v5
+
+workflow:
+  _type: react_agent
+  tool_names:
+    - internet_search
+    - current_datetime
+    - wikipedia_search
+    - code_generation
+  llm_name: default_llm
+  verbose: true
+  parse_agent_response_max_retries: 3
+  max_iterations: 10
