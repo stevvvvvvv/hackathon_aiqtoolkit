@@ -143,6 +143,7 @@ AI: [搜索并介绍NVIDIA AIQ工具包的详细信息]
 nvidia-nemo-agent-toolkit-hackathon/
 ├── configs/                    # 配置文件
 │   └── hackathon_config.yml   # 主配置文件
+│   └── hackathon_new_config.yml   # 新配置文件
 ├── external/                   # 外部模块
 │   └── aiqtoolkit-opensource-ui/  # 官方UI
 ├── docs/                       # 文档和截图
@@ -186,7 +187,7 @@ workflow:
 
 ```bash
 # 启用详细日志
-aiq serve --config_file configs/hackathon_config.yml --verbose
+aiq serve --config_file configs/hackathon_new_config.yml --verbose
 ```
 
 ## 🐛 故障排除
@@ -203,7 +204,7 @@ aiq serve --port 8002
 ```
 
 #### 2. API密钥错误
-- 检查 `configs/hackathon_config.yml` 中的API密钥配置
+- 检查 `configs/hackathon_new_config.yml` 中的API密钥配置
 - 确认环境变量 `TAVILY_API_KEY` 已正确设置
 - 验证API密钥的有效性和权限
 

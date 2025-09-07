@@ -227,7 +227,7 @@ source .venv/bin/activate
 
 # 启动后端服务
 echo "📡 启动后端服务..."
-aiq serve --config_file configs/hackathon_config.yml --host 0.0.0.0 --port 8001 &
+aiq serve --config_file configs/hackathon_new_config.yml --host 0.0.0.0 --port 8001 &
 BACKEND_PID=$!
 
 # 等待后端启动
@@ -333,7 +333,7 @@ main() {
     echo "   cd NeMo-Agent-Toolkit && ./stop.sh"
     echo ""
     echo "⚙️  自定义配置:"
-    echo "   编辑 NeMo-Agent-Toolkit/configs/hackathon_config.yml 文件"
+    echo "   编辑 NeMo-Agent-Toolkit/configs/hackathon_new_config.yml 文件"
     echo "   可修改 API密钥、模型名称、base_url 等"
     echo ""
     echo "📚 更多信息:"

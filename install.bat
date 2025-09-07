@@ -119,7 +119,7 @@ echo   # 默认使用ModelScope API ^(用户可修改^)
 echo   default_llm:
 echo     _type: openai
 echo     model_name: "Qwen/Qwen3-235B-A22B-Thinking-2507"
-echo     api_key: "ms-89f5403e-c244-4c01-ba7e-5202eebc096a"
+echo     api_key: "FILL_IT"
 echo     base_url: "https://api-inference.modelscope.cn/v1"
 echo     temperature: 0.7
 echo     max_tokens: 2048
@@ -148,14 +148,14 @@ echo echo 🚀 启动 NVIDIA NeMo Agent Toolkit AI对话机器人
 echo echo ==============================================
 echo.
 echo REM 设置环境变量
-echo set TAVILY_API_KEY=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
+echo set TAVILY_API_KEY=FILL_IT
 echo.
 echo REM 激活Python虚拟环境
 echo call .venv\Scripts\activate.bat
 echo.
 echo REM 启动后端服务
 echo echo 📡 启动后端服务...
-echo start /b aiq serve --config_file configs\hackathon_config.yml --host 0.0.0.0 --port 8001
+echo start /b aiq serve --config_file configs\hackathon_new_config.yml --host 0.0.0.0 --port 8001
 echo.
 echo REM 等待后端启动
 echo echo ⏳ 等待后端服务启动...
@@ -214,7 +214,7 @@ echo 🛑 停止服务:
 echo    stop.bat
 echo.
 echo ⚙️ 自定义配置:
-echo    编辑 configs\hackathon_config.yml 文件
+echo    编辑 configs\hackathon_new_config.yml 文件
 echo    可修改 API密钥、模型名称、base_url 等
 echo.
 echo 📚 更多信息:
